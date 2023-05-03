@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.java": "java",
+    "iosfwd": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
+}
