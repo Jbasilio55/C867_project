@@ -3,83 +3,114 @@
 
 using namespace std;
 
+// Create an array of degree program strings for printing
+string degreeProgramPrint[] = {"SECURITY","NETWORK","SOFTWARE"};
+
+// Default constructor
 Student::Student(){
-    string studentId;
-    string firstName;
-    string lastName;
-    string emailAddress;
-    int age;
+    this->studentId = "";
+    this->firstName = "";
+    this->lastName = "";
+    this->emailAddress = "";
+    this->age = 0;
     this->daysInCourse = new int[3];
+    this->degreeProgram = SOFTWARE;
 }
 
-Student::Student(string studentId, string firstName, string lastName, string emailAddress, int age, int dc1, int dc2, int dc3, DegreeProgram program){
-    this->setStudentId(studentId);
-    this->setFirstName(firstName);
-    this->setLastName(lastName);
-    this->setEmailAddress(emailAddress);
-    this->setAge(age);
+// Constructor with arguments
+Student::Student(string studentId, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, 
+int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram){
+    this->studentId = studentId;
+    this->firstName = firstName;
+    this->lastName = lastName;
+    this->emailAddress = emailAddress;
+    this->age = age;
+    this->degreeProgram = degreeProgram;
 
     this->daysInCourse = new int[3];
-    daysInCourse[0] = dc1;
-    daysInCourse[1] = dc2;
-    daysInCourse[2] = dc3;
+    daysInCourse[0] = daysInCourse1;
+    daysInCourse[1] = daysInCourse2;
+    daysInCourse[2] = daysInCourse3;
 }
 
-Student::~Student(){}
+Student::~Student(){
+    delete[] daysInCourse;
+}
 
 string Student::getStudentId(){
     return studentId;
 }
+
 string Student::getFirstName(){
     return firstName;
 }
+
 string Student::getLastName(){
     return lastName;
 }
+
 string Student::getEmailAddress(){
     return emailAddress;
 }
+
 int Student::getAge(){
     return age;
 }
+
 int* Student::getDaysInCourse(){
     return daysInCourse;
 }
 
 DegreeProgram Student::getDegreeProgram() {
-	return degreeProgram;
+    return degreeProgram;
 }
 
 void Student::setStudentId(string studentId){
     this->studentId = studentId;
 }
+
 void Student::setFirstName(string firstName){
     this->firstName = firstName;
 }
+
 void Student::setLastName(string lastName){
     this->lastName = lastName;
 }
+
 void Student::setEmailAddress(string emailAddress){
     this->emailAddress = emailAddress;
 }
+
 void Student::setAge(int age){
     this->age = age;
 }
-void Student::setDaysInCourse(int* dc){
-    daysInCourse[0] = dc[0];
-	daysInCourse[1] = dc[1];
-	daysInCourse[2] = dc[2];
+
+void Student::setDegreeProgram(DegreeProgram degreeProgram){
+    this->degreeProgram = degreeProgram;
+}
+
+void Student::setDaysInCourse(int daysInCourse[]){
+    this->daysInCourse[0] = daysInCourse[0];
+    this->daysInCourse[1] = daysInCourse[1];
+    this->daysInCourse[2] = daysInCourse[2];
 }
 
 void Student::print(){
+     // Get the days in course and degree program for the student
     int* pdaysInCourse = getDaysInCourse();
-	string dPStr = "Software";
-	if (getDegreeProgram() == DegreeProgram::NETWORK) dPStr = "Network";
-	if (getDegreeProgram() == DegreeProgram::SECURITY) dPStr = "Security";
-	cout << "Student ID: " << getStudentId()
-		<< "First Name: " << getFirstName()
-		<< "\t Last Name: " << getLastName()
-		<< "\t Student Age: " << getAge();
-	cout << "\t Days In Course: {" << pdaysInCourse[0] << ", " << pdaysInCourse[1] << ", " << pdaysInCourse[2] << "}";
-	cout << "\t Degree Program: " << dPStr << "." << endl;
+    string dPStr = "SOFTWARE";
+    if (getDegreeProgram() == NETWORK) {
+        dPStr = "NETWORK";
+    }
+    else if (getDegreeProgram() == SECURITY) {
+        dPStr = "SECURITY";
+    }
+    
+    // Print the student's information
+    cout<< getStudentId() << "\t" 
+        << getFirstName() << "\t" 
+        << getLastName() << "\t" 
+        << getEmailAddress() << "\t" 
+        << getAge() << "\t" << pdaysInCourse[0] 
+        << "\t" << pdaysInCourse[1] << "\t" << pdaysInCourse[2] << "\t" << degreeProgramPrint[degreeProgram] << endl;
 }

@@ -1,26 +1,27 @@
+#pragma once
 #include <iostream>
+#include <string>
 #include "degree.h"
 
 using namespace std;
 
+extern string degreeProgramPrint[];
 class Student{
 private:    
-    //D1 - encapsulation (default modifier is private)
-    string studentId;
-    string firstName;
-    string lastName;
-    string emailAddress;
+    //D1 - encapsulation
+    string studentId, firstName, lastName, emailAddress;
     int age;
     int *daysInCourse;
-    string degreeProgram;
-    
+    DegreeProgram degreeProgram;
+
 public:
     //constructors 1. (default with no perimeters, so you can make an instance of student without providing values)
     Student();
 
     //D2d constructor 2. (constructor must be provided with all values to instantiate a student)
-    Student(string studentId, string firstName, string lastName, string emailAddress, int age, int dc1, 
-    int dc2, int dc3, DegreeProgram program);
+    Student(string studentId, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, 
+    int daysInCourse3, DegreeProgram degreeProgram);
+;
 
     //destructor - deallocate memory
     ~Student();
@@ -31,8 +32,8 @@ public:
     string getLastName();
     string getEmailAddress();
     int getAge();
-    int* getDaysInCourse();
     DegreeProgram getDegreeProgram();
+    int* getDaysInCourse();
 
 	//D2b - mutators
     void setStudentId(string studentId);
@@ -40,6 +41,7 @@ public:
     void setLastName(string lastName);
     void setEmailAddress(string emailAddress);
     void setAge(int age);
+    void setDegreeProgram(DegreeProgram degreeProgram);
     void setDaysInCourse(int* daysInCourse);
 
     // Section D2e - print data
